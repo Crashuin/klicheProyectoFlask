@@ -1,0 +1,87 @@
+{% block content %}
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>Tabla de Usuarios</h2>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarUsuarioModal"><i class="bi bi-file-earmark-plus me-2 "></i> Agregar usuario</button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Usuario</th>
+              <th>Perfil</th>
+              <th>Estado</th>
+              <th>Último login</th>
+              <th>Fecha creación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>John Doe</td>
+              <td>johndoe123</td>
+              <td>Usuario estándar</td>
+              <td>Activo</td>
+              <td>2023-11-27 10:30 AM</td>
+              <td>2023-11-01</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+              </td>
+            </tr>
+            <!-- Puedes agregar más filas de usuarios aquí -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para agregar usuario -->
+<div class="modal fade" id="agregarUsuarioModal" tabindex="-1" aria-labelledby="agregarUsuarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarUsuarioModalLabel">Agregar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Contenido del formulario para agregar usuario -->
+        <form>
+          <div class="mb-3">
+            <label for="usuarioNombre" class="form-label">Nombre del usuario</label>
+            <input type="text" class="form-control" id="usuarioNombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="usuarioUsuario" class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" id="usuarioUsuario" required>
+          </div>
+          <div class="mb-3">
+            <label for="usuarioPerfil" class="form-label">Perfil</label>
+            <input type="text" class="form-control" id="usuarioPerfil" required>
+          </div>
+          <div class="mb-3">
+            <label for="usuarioEstado" class="form-label">Estado</label>
+            <input type="text" class="form-control" id="usuarioEstado" required>
+          </div>
+          <div class="mb-3">
+            <label for="usuarioUltimoLogin" class="form-label">Último login</label>
+            <input type="text" class="form-control" id="usuarioUltimoLogin" required>
+          </div>
+          <!-- Otros campos de usuario, si es necesario -->
+          <button type="submit" class="btn btn-primary mx-auto">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
