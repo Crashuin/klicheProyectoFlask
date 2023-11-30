@@ -41,41 +41,87 @@
     </div>
   </div>
 
-  <!-- Modal para agregar producto -->
-  <div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Contenido del formulario para agregar producto -->
-          <form>
-            <div class="mb-3">
-              <label for="productoCategoria" class="form-label">Categoría del producto</label>
-              <input type="text" class="form-control" id="productoCategoria" required>
+<!-- Modal para agregar producto -->
+<div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Contenido del formulario para agregar producto -->
+        <form method="post" action="{{ url_for('producto.ingresarProducto') }}" novalidate>
+          {{ form.hidden_tag() }}
+          
+          <div class="mb-3">
+            <label for="productoCategoria" class="form-label">Categoría del producto</label>
+            {{ form.productoCategoria(class="form-control", id="productoCategoria") }}
+            {% if form.productoCategoria.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.productoCategoria.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <div class="mb-3">
-              <label for="productoNombre" class="form-label">Nombre del producto</label>
-              <input type="text" class="form-control" id="productoNombre" required>
+            {% endif %}
+          </div>
+          <div class="mb-3">
+            <label for="productoNombre" class="form-label">Nombre del producto</label>
+            {{ form.productoNombre(class="form-control", id="productoNombre") }}
+            {% if form.productoNombre.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.productoNombre.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <div class="mb-3">
-              <label for="productoDescripcion" class="form-label">Descripción del producto</label>
-              <textarea class="form-control" id="productoDescripcion" rows="3" required></textarea>
+            {% endif %}
+          </div>
+          <div class="mb-3">
+            <label for="productoDescripcion" class="form-label">Descripción del producto</label>
+            {{ form.productoDescripcion(class="form-control", id="productoDescripcion") }}
+            {% if form.productoDescripcion.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.productoDescripcion.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <div class="mb-3">
-              <label for="productoImagen" class="form-label">URL de la imagen</label>
-              <input type="text" class="form-control" id="productoImagen" required>
+            {% endif %}
+          </div>
+          <div class="mb-3">
+            <label for="productoImagen" class="form-label">URL de la imagen</label>
+            {{ form.productoImagen(class="form-control", id="productoImagen") }}
+            {% if form.productoImagen.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.productoImagen.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <div class="mb-3">
-              <label for="productoPrecio" class="form-label">Precio de venta</label>
-              <input type="text" class="form-control" id="productoPrecio" required>
+            {% endif %}
+          </div>
+          <div class="mb-3">
+            <label for="productoPrecio" class="form-label">Precio de venta</label>
+            {{ form.productoPrecio(class="form-control", id="productoPrecio") }}
+            {% if form.productoPrecio.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.productoPrecio.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <!-- Otros campos de producto, si es necesario -->
-            <button type="submit" class="btn btn-primary mx-auto">Guardar</button>
-          </form>
-        </div>
+            {% endif %}
+          </div>
+          <!-- Otros campos de producto, si es necesario -->
+          <button type="submit" class="btn btn-primary mx-auto">Guardar</button>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Script para mostrar el modal si hay errores de validación -->
+{% if mostrar_modal %}
+<script>
+  $(document).ready(function () {
+    $('#agregarProductoModal').modal('show');
+  });
+</script>
+{% endif %}

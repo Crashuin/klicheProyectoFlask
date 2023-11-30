@@ -1,76 +1,122 @@
-
 <div class="container mt-5">
-    <div class="card">
-      <div class="card-header">
-        <h2>Tabla de Clientes</h2>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarClienteModal"><i class="bi bi-file-earmark-plus me-2 "></i> Agregar cliente</button>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Documento</th>
-                <th>Email</th>
-                <th>Fecha creación</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>Calle Principal 123</td>
-                <td>123456789</td>
-                <td>john.doe@example.com</td>
-                <td>2023-11-27</td>
-                <td>
-                  <button class="btn btn-warning">Editar</button>
-                  <button class="btn btn-danger">Eliminar</button>
-                </td>
-              </tr>
-              <!-- Puedes agregar más filas de clientes aquí -->
-            </tbody>
-          </table>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>Tabla de Clientes</h2>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarClienteModal"><i
+          class="bi bi-file-earmark-plus me-2 "></i> Agregar cliente</button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Documento</th>
+              <th>Email</th>
+              <th>Fecha creación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>John Doe</td>
+              <td>Calle Principal 123</td>
+              <td>123456789</td>
+              <td>john.doe@example.com</td>
+              <td>2023-11-27</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+              </td>
+            </tr>
+            <!-- Puedes agregar más filas de clientes aquí -->
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal para agregar cliente -->
-  <div class="modal fade" id="agregarClienteModal" tabindex="-1" aria-labelledby="agregarClienteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="agregarClienteModalLabel">Agregar Cliente</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Contenido del formulario para agregar cliente -->
-          <form>
-            <div class="mb-3">
-              <label for="clienteNombre" class="form-label">Nombre del cliente</label>
-              <input type="text" class="form-control" id="clienteNombre" required>
+<!-- Modal para agregar cliente -->
+<div class="modal fade" id="agregarClienteModal" tabindex="-1" aria-labelledby="agregarClienteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarClienteModalLabel">Agregar Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Contenido del formulario para agregar cliente -->
+        <form method="post" action="{{ url_for('cliente.ingresarCliente') }}" novalidate>
+          {{ form.hidden_tag() }}
+
+
+          <div class="mb-3">
+            <label for="clienteNombre" class="form-label">Nombre del cliente</label>
+            {{ form.clienteNombre(class="form-control", id="clienteNombre") }}
+            {% if form.clienteNombre.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.clienteNombre.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <div class="mb-3">
-              <label for="clienteDireccion" class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="clienteDireccion" required>
+            {% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label for="clienteDireccion" class="form-label">Dirección</label>
+            {{ form.clienteDireccion(class="form-control", id="clienteDireccion") }}
+            {% if form.clienteDireccion.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.clienteDireccion.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <div class="mb-3">
-              <label for="clienteDocumento" class="form-label">Documento</label>
-              <input type="text" class="form-control" id="clienteDocumento" required>
+            {% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label for="clienteDocumento" class="form-label">Documento</label>
+            {{ form.clienteDocumento(class="form-control", id="clienteDocumento") }}
+            {% if form.clienteDocumento.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.clienteDocumento.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <div class="mb-3">
-              <label for="clienteEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="clienteEmail" required>
+            {% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label for="clienteEmail" class="form-label">Email</label>
+            {{ form.clienteEmail(class="form-control", id="clienteEmail") }}
+            {% if form.clienteEmail.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.clienteEmail.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
             </div>
-            <!-- Otros campos de cliente, si es necesario -->
-            <button type="submit" class="btn btn-primary mx-auto">Guardar</button>
-          </form>
-        </div>
+            {% endif %}
+          </div>
+
+          <!-- Otros campos de cliente, si es necesario -->
+          <button type="submit" class="btn btn-primary mx-auto">Guardar</button>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- Script para mostrar el modal si hay errores de validación -->
+{% if mostrar_modal %}
+<script>
+  $(document).ready(function () {
+    $('#agregarClienteModal').modal('show');
+  });
+</script>
+{% endif %}

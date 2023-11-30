@@ -4,7 +4,8 @@
   <div class="card">
     <div class="card-header">
       <h2>Tabla de Usuarios</h2>
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarUsuarioModal"><i class="bi bi-file-earmark-plus me-2 "></i> Agregar usuario</button>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarUsuarioModal"><i
+          class="bi bi-file-earmark-plus me-2 "></i> Agregar usuario</button>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -44,7 +45,8 @@
 </div>
 
 <!-- Modal para agregar usuario -->
-<div class="modal fade" id="agregarUsuarioModal" tabindex="-1" aria-labelledby="agregarUsuarioModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarUsuarioModal" tabindex="-1" aria-labelledby="agregarUsuarioModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -53,28 +55,64 @@
       </div>
       <div class="modal-body">
         <!-- Contenido del formulario para agregar usuario -->
-        <form>
+        <form method="post" action="{{ url_for('usuario.ingresarUsuario') }}" novalidate>
+          {{ form.hidden_tag() }}
+
           <div class="mb-3">
             <label for="usuarioNombre" class="form-label">Nombre del usuario</label>
-            <input type="text" class="form-control" id="usuarioNombre" required>
+            {{ form.usuarioNombre(class="form-control", id="usuarioNombre") }}
+
+            {% if form.usuarioNombre.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.usuarioNombre.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
+            </div>
+            {% endif %}
+
           </div>
           <div class="mb-3">
-            <label for="usuarioUsuario" class="form-label">Nombre de usuario</label>
-            <input type="text" class="form-control" id="usuarioUsuario" required>
+            <label for="usuarioUsuario" class="form-label">Apodo de usuario</label>
+            {{ form.usuario(class="form-control", id="usuarioUsuario") }}
+
+            {% if form.usuario.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.usuario.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
+            </div>
+            {% endif %}
+
           </div>
           <div class="mb-3">
-            <label for="usuarioPerfil" class="form-label">Perfil</label>
-            <input type="text" class="form-control" id="usuarioPerfil" required>
+            <label for="usuarioPerfil" class="form-label">Perfil del usuario</label>
+            {{ form.usuarioPerfil(class="form-select", id="usuarioPerfil") }}
+
+
+            {% if form.usuarioPerfil.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.usuarioPerfil.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
+            </div>
+            {% endif %}
+
           </div>
           <div class="mb-3">
             <label for="usuarioEstado" class="form-label">Estado</label>
-            <input type="text" class="form-control" id="usuarioEstado" required>
+            {{ form.usuarioEstado(class="form-control", id="usuarioEstado") }}
+
+
+            {% if form.usuarioEstado.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.usuarioEstado.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
+            </div>
+            {% endif %}
+
           </div>
-          <div class="mb-3">
-            <label for="usuarioUltimoLogin" class="form-label">Último login</label>
-            <input type="text" class="form-control" id="usuarioUltimoLogin" required>
-          </div>
-          <!-- Otros campos de usuario, si es necesario -->
+
           <button type="submit" class="btn btn-primary mx-auto">Guardar</button>
         </form>
       </div>
@@ -82,6 +120,13 @@
   </div>
 </div>
 
-
-
 {% endblock %}
+
+<!-- Script para mostrar el modal si hay errores de validación -->
+{% if mostrar_modal %}
+<script>
+  $(document).ready(function () {
+    $('#agregarUsuarioModal').modal('show');
+  });
+</script>
+{% endif %}
