@@ -1,9 +1,2 @@
-# klicheProyectoFlask
-
-> Dependencias:
-
-> 1. pip install Flask
-> 2. pip install Flask-WTF 
-
-
-> 3. pip install email-validator
+# Install dependencies
+pip install flask flask-login flask-wtf psycopg2  python-decouple python-dotenv
