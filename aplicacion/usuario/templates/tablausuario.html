@@ -61,7 +61,6 @@
           <div class="mb-3">
             <label for="usuarioNombre" class="form-label">Nombre del usuario</label>
             {{ form.usuarioNombre(class="form-control", id="usuarioNombre") }}
-
             {% if form.usuarioNombre.errors %}
             <div class="text-danger small mt-2">
               {% for error in form.usuarioNombre.errors %}
@@ -69,12 +68,11 @@
               {% endfor %}
             </div>
             {% endif %}
-
           </div>
+
           <div class="mb-3">
             <label for="usuarioUsuario" class="form-label">Apodo de usuario</label>
             {{ form.usuario(class="form-control", id="usuarioUsuario") }}
-
             {% if form.usuario.errors %}
             <div class="text-danger small mt-2">
               {% for error in form.usuario.errors %}
@@ -82,13 +80,24 @@
               {% endfor %}
             </div>
             {% endif %}
-
           </div>
+
+          <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            {{ form.contrasena(class="form-control", id="contrasena") }}
+            {% if form.contrasena.errors %}
+                <div class="text-danger small mt-2">
+                    {% for error in form.contrasena.errors %}
+                        <label>{{ error }}</label>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+
           <div class="mb-3">
             <label for="usuarioPerfil" class="form-label">Perfil del usuario</label>
             {{ form.usuarioPerfil(class="form-select", id="usuarioPerfil") }}
-
-
             {% if form.usuarioPerfil.errors %}
             <div class="text-danger small mt-2">
               {% for error in form.usuarioPerfil.errors %}
@@ -96,8 +105,8 @@
               {% endfor %}
             </div>
             {% endif %}
-
           </div>
+
           <div class="mb-3">
             <label for="usuarioEstado" class="form-label">Estado</label>
             {{ form.usuarioEstado(class="form-control", id="usuarioEstado") }}

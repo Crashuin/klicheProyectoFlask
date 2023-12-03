@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+
+
+{% block title %}Error 404{% endblock %}
+
+{% block customCSS %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-message">Página no encontrada</div>
+        <p>Lo sentimos, la página que estás buscando no existe.</p>
+        <a href="/" class="back-to-home">Volver a la página de inicio</a>
+    </div>
+
+{% endblock %}
