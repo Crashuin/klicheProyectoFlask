@@ -7,11 +7,14 @@ from . import auth
 # formulario
 from .forms import LoginForm
 
+
 # modelos
 from .models.ModelUser import ModelUser
 
 # entidades
 from .models.entities.User import User
+from flask_login import login_user, login_manager, logout_user, login_required
+
 
 
 @auth.route('/')
@@ -30,7 +33,7 @@ def login():
             
             if loged_user != None:
                 if loged_user.contrasena:
-                    flash('Ingreso exitoso')
+                    login_user(loged_user)
                     return redirect(url_for('dashboard.dashboard'))
                 else:
                     flash('Contraseña incorrecta')
@@ -38,4 +41,10 @@ def login():
                 flash('Usuario no encontrado')
                 
     return render_template('login.html', form=form)
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login'))
 

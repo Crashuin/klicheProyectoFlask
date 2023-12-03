@@ -36,3 +36,21 @@ class ModelUser():
 
         except Exception as e:
             raise Exception(e)
+        
+    @classmethod
+    def get_by_id(self, id):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                sql = """SELECT id, usuario, nombre, perfil, estado, ultimo_login, fecha_creacion FROM usuario 
+                    WHERE id = '{}'""".format(id)
+                cursor.execute(sql)
+                row = cursor.fetchone()
+
+                if row is not None:
+                    logged_user = User(row[0], row[1], None ,row[2], row[3], row[4], row[5], row[6])
+                    return logged_user
+                else:
+                    return None
+        except Exception as e:
+            raise Exception(e)
