@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">
       <h2>Tabla de Categorías</h2>
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarCategoriaModal"><i
+      <button class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#agregarCategoriaModal"><i
           class="bi bi-file-earmark-plus me-2 "></i>Agregar categoría</button>
     </div>
     <div class="card-body">
@@ -17,18 +17,35 @@
             </tr>
           </thead>
           <tbody>
+            {% for categoria in items_on_page %}
             <tr>
-              <td>1</td>
-              <td>Categoría Ejemplo</td>
-              <td>2023-11-27</td>
+              <td>{{ categoria[0] }}</td>
+              <td>{{ categoria[1] }}</td>
+              <td>{{ categoria[2]}}</td>
               <td>
                 <button class="btn btn-warning">Editar</button>
                 <button class="btn btn-danger">Eliminar</button>
               </td>
             </tr>
-            <!-- Puedes agregar más filas de categorías aquí -->
+            {% endfor %}
+  
           </tbody>
         </table>
+      </div>
+      <div class="text-black mt-3 ms-auto">
+        {% if page > 1 %}
+          <a href="{{ url_for('categoria.categoriaPage', page=page-1) }}" class="btn btn-primary">Anterior</a>
+        {% else %}
+          <span class="btn btn-secondary disabled">Anterior</span>
+        {% endif %}
+
+        <span class="mx-2 text-black">Página {{ page }} de {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+          <a href="{{ url_for('categoria.categoriaPage', page=page+1) }}" class="btn btn-primary">Siguiente</a>
+        {% else %}
+          <span class="btn btn-secondary disabled">Siguiente</span>
+        {% endif %}
       </div>
     </div>
   </div>

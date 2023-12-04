@@ -19,9 +19,9 @@ def usuarioPage():
     form = UsuarioForm()
     usuarios = UserModel.listar_usuarios()
 
+    #Paginacion
     page = request.args.get('page', 1, type=int)
     per_page = 5
-
     total_pages = (len(usuarios) + per_page - 1) // per_page
     items_on_page = usuarios[(page - 1) * per_page: page * per_page]
 
@@ -41,6 +41,13 @@ def ingresarUsuario():
             print("Usuario no registrado")
 
         return redirect(url_for('usuario.usuarioPage'))
+    
+    #Paginación
+    usuarios = UserModel.listar_usuarios()
+    page = request.args.get('page', 1, type=int)
+    per_page = 5
+    total_pages = (len(usuarios) + per_page - 1) // per_page
+    items_on_page = usuarios[(page - 1) * per_page: page * per_page]
 
-    return render_template('usuario.html', form=form, mostrar_modal=form.errors)
+    return render_template('usuario.html', form=form, usuarios=usuarios, items_on_page=items_on_page, total_pages=total_pages, page=page, mostrar_modal=form.errors)
 
