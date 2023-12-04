@@ -1,0 +1,41 @@
+2023-12-04 18:26:01,345 - WARNING -  * Debugger is active!
+2023-12-04 18:26:01,366 - INFO -  * Debugger PIN: 412-029-034
+2023-12-04 18:26:23,099 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-04 18:26:23,099 - INFO - [33mPress CTRL+C to quit[0m
+2023-12-04 18:26:23,109 - INFO -  * Restarting with stat
+2023-12-04 18:26:24,050 - WARNING -  * Debugger is active!
+2023-12-04 18:26:24,074 - INFO -  * Debugger PIN: 412-029-034
+2023-12-04 18:26:37,387 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:37] "GET /dashboard HTTP/1.1" 200 -
+2023-12-04 18:26:38,261 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2023-12-04 18:26:38,292 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:38] "[36mGET /static/js/modal.js HTTP/1.1[0m" 304 -
+2023-12-04 18:26:38,342 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:38] "[36mGET /static/css/navbar.css HTTP/1.1[0m" 304 -
+2023-12-04 18:26:38,360 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:38] "[36mGET /static/css/sidebar.css HTTP/1.1[0m" 304 -
+2023-12-04 18:26:38,415 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:38] "GET /static/css/contenidodashboard.css HTTP/1.1" 200 -
+2023-12-04 18:26:38,426 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:38] "[36mGET /static/images/logoKliche.png HTTP/1.1[0m" 304 -
+2023-12-04 18:26:50,170 - ERROR - Error provocado en la aplicaci�n
+2023-12-04 18:26:50,184 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:50] "[35m[1mGET /error HTTP/1.1[0m" 500 -
+2023-12-04 18:26:50,336 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:50] "GET /error?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2023-12-04 18:26:50,341 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:50] "GET /error?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2023-12-04 18:26:50,391 - INFO - 127.0.0.1 - - [04/Dec/2023 18:26:50] "GET /error?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2023-12-04 18:27:28,050 - INFO -  * Detected change in 'c:\\Users\\danie\\OneDrive\\Escritorio\\flask\\KlicheAdmin\\aplicacion\\__init__.py', reloading
+2023-12-04 18:27:28,058 - INFO -  * Detected change in 'c:\\Users\\danie\\OneDrive\\Escritorio\\flask\\KlicheAdmin\\aplicacion\\__init__.py', reloading
+2023-12-04 18:27:28,137 - INFO -  * Restarting with stat
+2023-12-04 18:27:29,291 - WARNING -  * Debugger is active!
+2023-12-04 18:27:29,308 - WARNING -  * Debugger is active!
+2023-12-04 18:27:29,320 - INFO -  * Debugger PIN: 412-029-034
+2023-12-04 18:27:29,338 - INFO -  * Debugger PIN: 412-029-034
+2023-12-04 18:27:43,196 - INFO -  * Detected change in 'c:\\Users\\danie\\OneDrive\\Escritorio\\flask\\KlicheAdmin\\aplicacion\\__init__.py', reloading
+2023-12-04 18:27:43,199 - INFO -  * Detected change in 'c:\\Users\\danie\\OneDrive\\Escritorio\\flask\\KlicheAdmin\\aplicacion\\__init__.py', reloading
+2023-12-04 18:27:43,360 - INFO -  * Restarting with stat
+2023-12-04 18:27:45,103 - WARNING -  * Debugger is active!
+2023-12-04 18:27:45,135 - INFO -  * Debugger PIN: 412-029-034
+2023-12-04 18:27:45,144 - WARNING -  * Debugger is active!
+2023-12-04 18:27:45,163 - INFO -  * Debugger PIN: 412-029-034
+2023-12-04 18:28:29,595 - INFO -  * Detected change in 'c:\\Users\\danie\\OneDrive\\Escritorio\\flask\\KlicheAdmin\\aplicacion\\auth\\models\\entities\\User.py', reloading
+2023-12-04 18:28:29,820 - INFO -  * Detected change in 'c:\\Users\\danie\\OneDrive\\Escritorio\\flask\\KlicheAdmin\\aplicacion\\auth\\models\\entities\\User.py', reloading
+2023-12-04 18:28:30,079 - INFO -  * Restarting with stat
+2023-12-04 18:28:31,301 - WARNING -  * Debugger is active!
+2023-12-04 18:28:31,325 - INFO -  * Debugger PIN: 412-029-034
+2023-12-04 18:28:31,390 - WARNING -  * Debugger is active!
+2023-12-04 18:28:31,409 - INFO -  * Debugger PIN: 412-029-034

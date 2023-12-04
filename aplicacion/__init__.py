@@ -20,6 +20,9 @@ from .auth.models.ModelUser import ModelUser
 #flask-login
 from flask_login import LoginManager, login_user, logout_user, login_required
 
+#logs
+import logging
+
 def page_not_found(error):
     return render_template('404.html'), 404
 
@@ -58,7 +61,11 @@ def create_app():
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(401, status_401)
 
+    # Configurar el sistema de logs
+    logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
     return app
+
 
 
 

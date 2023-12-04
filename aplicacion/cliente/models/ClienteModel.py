@@ -1,4 +1,5 @@
-from .entities.CategoriaEntity import Categoria
+from .entities.ClienteEntity import Cliente
+from werkzeug.security import generate_password_hash
 
 import psycopg2
 from psycopg2 import DatabaseError
@@ -16,29 +17,39 @@ def get_connection():
     except DatabaseError as ex:
         raise ex
 
-class CategoriaModel():
-
+class ClienteModel():
     @classmethod
-    def register(self, categoria):
+    def register(self, cliente):
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                sql = """INSERT INTO categoria ("nomCategoria")
-                     VALUES ('{}')""".format(categoria.nomCategoria)
-                cursor.execute(sql)
+                sql = """INSERT INTO cliente (nombre, contrasena, direccion, documento, email, "fechaNacimiento")
+                     VALUES (%s, %s, %s, %s, %s, %s)"""
+                
+                values = (
+                    cliente.nombre,
+                    generate_password_hash(cliente.contrasena),
+                    cliente.direccion,
+                    cliente.documento,
+                    cliente.email,
+                    cliente.fechaNacimiento,
+                )
+                
+                cursor.execute(sql, values)
                 connection.commit()
+                print(cliente)
                 return True
         except Exception as e:
             raise Exception(e)
         finally:
             connection.close()
-    
+
     @classmethod
-    def listar_categorias(cls):
+    def listar_clientes(self):
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                sql = """SELECT * FROM categoria"""
+                sql = """SELECT * FROM cliente"""
                 cursor.execute(sql)
                 clientes = cursor.fetchall()
                 return clientes
