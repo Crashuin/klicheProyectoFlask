@@ -27,7 +27,6 @@ def login():
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User('', request.form.get('usuario'), request.form.get('contrasena'), '', '', '', '','')
-            print("Usuario formulario:", user)
             loged_user = ModelUser.login(user)
             
             if loged_user != None:
