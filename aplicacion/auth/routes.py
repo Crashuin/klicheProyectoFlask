@@ -7,7 +7,6 @@ from . import auth
 # formulario
 from .forms import LoginForm
 
-
 # modelos
 from .models.ModelUser import ModelUser
 
