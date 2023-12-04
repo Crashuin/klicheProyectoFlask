@@ -10,6 +10,7 @@
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered">
+
           <thead>
             <tr>
               <th>ID</th>
@@ -24,22 +25,39 @@
           </thead>
 
           <tbody>
-            {% for usuario in usuarios %}
-              <tr>
-                <td>{{ usuario[0] }}</td>
-                <td>{{ usuario[1] }}</td>
-                <td>{{ usuario[2] }}</td>
-                <td>{{ usuario[4] }}</td>
-                <td>{{ 'Activo' if usuario[5] else 'Inactivo' }}</td>
-                <td>{{ usuario[6] if usuario[6] else 'N/A' }}</td>
-                <td>{{ usuario[7] if usuario[7] else 'N/A' }}</td>
-                <td>
-                  <button class="btn btn-warning">Editar</button>
-                  <button class="btn btn-danger">Eliminar</button>
-                </td>
-              </tr>
+            {% for usuario in items_on_page %}
+            <tr>
+              <td>{{ usuario[0] }}</td>
+              <td>{{ usuario[1] }}</td>
+              <td>{{ usuario[2] }}</td>
+              <td>{{ usuario[4] }}</td>
+              <td>{{ 'Activo' if usuario[5] else 'Inactivo' }}</td>
+              <td>{{ usuario[6] if usuario[6] else 'N/A' }}</td>
+              <td>{{ usuario[7] if usuario[7] else 'N/A' }}</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+              </td>
+            </tr>
             {% endfor %}
+          </tbody>
         </table>
+
+      </div>
+      <div class="text-black mt-3 ms-auto">
+        {% if page > 1 %}
+          <a href="{{ url_for('usuario.usuarioPage', page=page-1) }}" class="btn btn-primary">Anterior</a>
+        {% else %}
+          <span class="btn btn-secondary disabled">Anterior</span>
+        {% endif %}
+
+        <span class="mx-2 text-black">Página {{ page }} de {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+          <a href="{{ url_for('usuario.usuarioPage', page=page+1) }}" class="btn btn-primary">Siguiente</a>
+        {% else %}
+          <span class="btn btn-secondary disabled">Siguiente</span>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -89,13 +107,13 @@
             <label for="contrasena" class="form-label">Contraseña</label>
             {{ form.contrasena(class="form-control", id="contrasena") }}
             {% if form.contrasena.errors %}
-                <div class="text-danger small mt-2">
-                    {% for error in form.contrasena.errors %}
-                        <label>{{ error }}</label>
-                    {% endfor %}
-                </div>
+            <div class="text-danger small mt-2">
+              {% for error in form.contrasena.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
+            </div>
             {% endif %}
-        </div>
+          </div>
 
 
           <div class="mb-3">
