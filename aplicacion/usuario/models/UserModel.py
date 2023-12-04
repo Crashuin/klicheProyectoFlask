@@ -1,3 +1,5 @@
+from werkzeug.security import generate_password_hash
+
 import psycopg2
 from psycopg2 import DatabaseError
 from decouple import config
@@ -22,8 +24,9 @@ class UserModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 sql = """INSERT INTO usuario (usuario, contrasena, nombre, perfil, estado)
-                    VALUES ('{}', '{}', '{}', '{}', '{}')""".format(user.usuario, user.contrasena, user.nombre, user.perfil, user.estado)
+                    VALUES ('{}', '{}', '{}', '{}', '{}')""".format(user.usuario, generate_password_hash(user.contrasena) , user.nombre, user.perfil, user.estado)
                 cursor.execute(sql)
+                print("Usuario ingresado: ", cursor.execute(sql))
                 connection.commit()
                 return True
         except Exception as e:

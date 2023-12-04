@@ -32,12 +32,11 @@ def usuarioPage():
 def ingresarUsuario():
     form = UsuarioForm()
     if form.validate_on_submit():
-        user = User('', request.form.get('usuarioNombre'), request.form.get('usuario'), request.form.get('contrasena'), request.form.get('usuarioPerfil'), request.form.get('usuarioEstado'),'','')
+        user = User('', request.form.get('usuario'), request.form.get('contrasena'), request.form.get('usuarioNombre'), request.form.get('usuarioPerfil'), request.form.get('usuarioEstado'),'','')
         usuario_registrado = UserModel.register(user)
 
         if usuario_registrado:
-            flash('Usuario registrado correctamente')
-            print(usuario_registrado)
+            print("usuario_registrado")
         else:
             print("Usuario no registrado")
 
