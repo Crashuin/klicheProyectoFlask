@@ -12,9 +12,10 @@ from .models.ModelUser import ModelUser
 
 # entidades
 from .models.entities.User import User
-from flask_login import login_user, login_manager, logout_user, login_required
+from flask_login import current_user, login_user, login_manager, logout_user, login_required
 
-
+#logs
+import logging
 
 @auth.route('/')
 def index():
@@ -31,6 +32,7 @@ def login():
             if loged_user != None:
                 if loged_user.contrasena:
                     login_user(loged_user)
+                    logging.info(f"Usuario {current_user.usuario} ha iniciado sesión")
                     return redirect(url_for('dashboard.dashboard'))
                 else:
                     flash('Contraseña incorrecta')
@@ -42,6 +44,7 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
+    logging.info(f"Usuario {current_user.usuario} ha cerrado sesión")
     logout_user()
     return redirect(url_for('auth.login'))
 

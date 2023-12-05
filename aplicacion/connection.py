@@ -1,7 +1,7 @@
 
 import logging
 from decouple import config
-from flask import render_template
+from flask import abort, render_template
 
 import mysql.connector
 
@@ -18,8 +18,6 @@ def get_connection():
         )
     except mysql.connector.Error as e:
         logging.error(f"Error en la base de datos: {e}")
-        if e.errno  == 2003 or e.errno  == 2006 or e.errno  == 1146:
-                return render_template('error_conexion_servidor.html')
         return render_template('500.html'), 500
 
 
