@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField
+from wtforms import StringField, SelectField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired 
 
 from flask_wtf.file import FileField, FileAllowed, FileRequired
@@ -14,3 +14,5 @@ class ProductoForm(FlaskForm):
      
     ] )
     productoPrecio = StringField('Precio de venta', validators=[InputRequired(message="El precio no debe ir vacio")])
+
+    productoStock = IntegerField('Stock', validators=[InputRequired(message="El stock no debe ir vacio")])

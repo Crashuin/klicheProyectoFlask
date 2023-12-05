@@ -15,19 +15,22 @@
                 <th>Descripción</th>
                 <th>Imagen</th>
                 <th>Precio venta</th>
-                <th>Fecha creación</th>
+                <th>Stock</th>
+
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
+              {% for producto in items_on_page %}
               <tr>
-                <td>1</td>
-                <td>Electrónicos</td>
-                <td>Portátil XYZ</td>
-                <td>Una descripción del producto.</td>
-                <td><img src="ruta_de_la_imagen.jpg" alt="Imagen del producto" width="50"></td>
-                <td>$999.99</td>
-                <td>2023-11-27</td>
+                <td>{{ producto[0] }} </td>
+                <td>{{ producto[1] }}</td>
+                <td>{{ producto[2] }}</td>
+                <td>{{ producto[3] }}</td>
+                <td><img src="{{ url_for('static', filename='{{producto[4]}}') }}" alt="Imagen del producto" width="50"></td>
+                <td>{{ producto[5] }}</td>
+                <td>{{ producto[6] }}</td>
+
                 <td>
                   <button class="btn btn-warning">
                     <i class="bi bi-pencil-fill text-dark"></i> 
@@ -38,10 +41,24 @@
                   </button>
                 </td>
               </tr>
-              <!-- Puedes agregar más filas de productos aquí -->
+              {% endfor %}
             </tbody>
           </table>
         </div>
+        <div class="text-black mt-3 ms-auto">
+          {% if page > 1 %}
+            <a href="{{ url_for('producto.productoPage', page=page-1) }}" class="btn btn-primary">Anterior</a>
+          {% else %}
+            <span class="btn btn-secondary disabled">Anterior</span>
+          {% endif %}
+  
+          <span class="mx-2 text-black">Página {{ page }} de {{ total_pages }}</span>
+  
+          {% if page < total_pages %}
+            <a href="{{ url_for('producto.productoPage', page=page+1) }}" class="btn btn-primary">Siguiente</a>
+          {% else %}
+            <span class="btn btn-secondary disabled">Siguiente</span>
+          {% endif %}
       </div>
     </div>
   </div>
@@ -114,7 +131,18 @@
             </div>
             {% endif %}
           </div>
-          <!-- Otros campos de producto, si es necesario -->
+          <div class="mb-3">
+            <label for="productoStock" class="form-label">Stock</label>
+            {{ form.productoStock(class="form-control", id="productoStock") }}
+            {% if form.productoStock.errors %}
+            <div class="text-danger small mt-2">
+              {% for error in form.productoStock.errors %}
+              <label>{{ error }}</label>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+
           <button type="submit" class="btn btn-primary mx-auto">Guardar</button>
         </form>
       </div>

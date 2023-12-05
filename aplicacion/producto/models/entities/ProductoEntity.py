@@ -1,11 +1,11 @@
 class Producto():
-    def __init__(self, idCliente, nombre, contrasena, direccion, documento, email, fechaNacimiento, fecha_creacion   ) -> None:
-        self.idCliente = idCliente
+    def __init__(self, id, nombre, categoria, descripcion, imagen, precio, stock ) -> None:
+        self.id = id
         self.nombre = nombre
-        self.contrasena = contrasena
-        self.direccion = direccion
-        self.documento = documento
-        self.email = email
-        self.fechaNacimiento = fechaNacimiento
-        self.fecha_creacion = fecha_creacion
+        self.categoria = categoria
+        self.descripcion = descripcion
+        self.imagen = imagen
+        self.precio = precio
+        self.stock = stock
+        
     

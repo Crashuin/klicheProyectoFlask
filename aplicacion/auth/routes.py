@@ -23,7 +23,6 @@ def index():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User('', request.form.get('usuario'), request.form.get('contrasena'), '', '', '', '','')
