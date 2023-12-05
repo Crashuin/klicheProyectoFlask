@@ -30,7 +30,7 @@ def clientePage():
 def ingresarCliente():
     form = ClienteForm()
     if form.validate_on_submit():
-        cliente = Cliente('', request.form.get('clienteNombre'), request.form.get('clienteContrasena'), request.form.get('clienteDireccion'), request.form.get('clienteDocumento'), request.form.get('clienteEmail'), request.form.get('clienteFechaNacimiento'),'')
+        cliente = Cliente('', request.form.get('clienteNombre'), request.form.get('clienteContrasena'), request.form.get('clienteDireccion'), request.form.get('clienteTelefono'), request.form.get('clienteEmail'), request.form.get('clienteFechaNacimiento'),'')
         cliente_registrado = ClienteModel.register(cliente)
         print(cliente)
         if cliente_registrado:

@@ -1,20 +1,11 @@
+
 from werkzeug.security import generate_password_hash
 
-import psycopg2
-from psycopg2 import DatabaseError
-from decouple import config
+#conexion a bd
+from ...connection import get_connection
 
-def get_connection():
-    try:
-        return psycopg2.connect(
-            host = config('PGSQL_HOST'),
-            user = config('PGSQL_USER'),
-            password = config('PGSQL_PASSWORD'),
-            database = config('PGSQL_DATABASE'),
-            port = config('PGSQL_PORT')
-        )
-    except DatabaseError as ex:
-        raise ex
+#import
+import logging
 
 class UserModel():
 
@@ -28,7 +19,8 @@ class UserModel():
                 cursor.execute(sql)
                 connection.commit()
                 return True
-        except Exception as e:
+        except connection.mysql.connector.Error as e:
+            logging.error(f"Error en la base de datos: {e}")
             raise Exception(e)
         finally:
             connection.close()
@@ -42,7 +34,8 @@ class UserModel():
                 cursor.execute(sql)
                 users = cursor.fetchall()
                 return users
-        except Exception as e:
+        except connection.mysql.connector.Error as e:
+            logging.error(f"Error en la base de datos: {e}")
             raise Exception(e)
         finally:
             connection.close()

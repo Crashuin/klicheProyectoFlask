@@ -23,11 +23,15 @@ from flask_login import LoginManager, login_user, logout_user, login_required
 #logs
 import logging
 
+#funciones manejo de error
 def page_not_found(error):
     return render_template('404.html'), 404
 
 def status_401(error):
     return redirect(url_for('auth.login'))
+
+def internal_server_error(error):
+    return render_template('500.html'), 500
 
 def create_app():
 
@@ -60,9 +64,10 @@ def create_app():
     #Error handlers
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(401, status_401)
+    app.register_error_handler(500, internal_server_error)
 
     # Configurar el sistema de logs
-    logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(filename='app.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
     return app
 

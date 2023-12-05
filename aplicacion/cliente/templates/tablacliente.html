@@ -12,10 +12,11 @@
             <tr>
               <th>ID</th>
               <th>Nombre</th>
-              <th>Dirección</th>
-              <th>Documento</th>
               <th>Email</th>
+              <th>Teléfono</th>
+              <th>Direccion</th>
               <th>Fecha de nacimiento</th>
+              <th>Ultimo login</th>
               <th>Fecha creación</th>
               <th>Acciones</th>
             </tr>
@@ -30,6 +31,7 @@
               <td>{{ cliente[4] }}</td>
               <td>{{ cliente[5] }}</td>
               <td>{{ cliente[6] }}</td>
+              <td>{{ cliente[7] }}</td>
               <td>
                 <button class="btn btn-warning">
                   <i class="bi bi-pencil-fill text-dark"></i> 
@@ -46,7 +48,7 @@
       </div>
       <div class="text-black mt-3 ms-auto">
         {% if page > 1 %}
-          <a href="{{ url_for('categoria.categoriaPage', page=page-1) }}" class="btn btn-primary">Anterior</a>
+          <a href="{{ url_for('cliente.clientePage', page=page-1) }}" class="btn btn-primary">Anterior</a>
         {% else %}
           <span class="btn btn-secondary disabled">Anterior</span>
         {% endif %}
@@ -54,7 +56,7 @@
         <span class="mx-2 text-black">Página {{ page }} de {{ total_pages }}</span>
 
         {% if page < total_pages %}
-          <a href="{{ url_for('categoria.categoriaPage', page=page+1) }}" class="btn btn-primary">Siguiente</a>
+          <a href="{{ url_for('cliente.clientePage', page=page+1) }}" class="btn btn-primary">Siguiente</a>
         {% else %}
           <span class="btn btn-secondary disabled">Siguiente</span>
         {% endif %}
@@ -103,11 +105,11 @@
           </div>
 
           <div class="mb-3">
-            <label for="clienteDocumento" class="form-label">Documento</label>
-            {{ form.clienteDocumento(class="form-control", id="clienteDocumento") }}
-            {% if form.clienteDocumento.errors %}
+            <label for="clienteTelefono" class="form-label">Teléfono</label>
+            {{ form.clienteTelefono(class="form-control", id="clienteTelefono") }}
+            {% if form.clienteTelefono.errors %}
             <div class="text-danger small mt-2">
-              {% for error in form.clienteDocumento.errors %}
+              {% for error in form.clienteTelefono.errors %}
               <label>{{ error }}</label>
               {% endfor %}
             </div>
@@ -143,7 +145,7 @@
             {{ form.clienteFechaNacimiento(class="form-control", id="fechaNacimiento") }}
             {% if form.clienteFechaNacimiento.errors %}
             <div class="text-danger small mt-2">
-              {% for error in form.clienteFechaNacimienta.errors %}
+              {% for error in form.clienteFechaNacimiento.errors %}
               <label>{{ error }}</label>
               {% endfor %}
             </div>

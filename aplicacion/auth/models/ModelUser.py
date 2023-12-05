@@ -1,30 +1,24 @@
+from flask import render_template
 from .entities.User import User
 
-import psycopg2
-from psycopg2 import DatabaseError
-from decouple import config
-
-def get_connection():
-    try:
-        return psycopg2.connect(
-            host = config('PGSQL_HOST'),
-            user = config('PGSQL_USER'),
-            password = config('PGSQL_PASSWORD'),
-            database = config('PGSQL_DATABASE'),
-            port = config('PGSQL_PORT')
-        )
-    except DatabaseError as ex:
-        raise ex
+#conexion a bd
+from ...connection import get_connection
+   
+#logging
+import logging
 
 class ModelUser():
     @classmethod
     def login(self, user):
         try:
             connection = get_connection()
+ 
             with connection.cursor() as cursor:
-                sql = """SELECT id, usuario , contrasena, nombre, perfil, estado, ultimo_login, fecha_creacion FROM usuario 
-                    WHERE usuario = '{}'""".format(user.usuario)
-                cursor.execute(sql, (user.usuario))
+                sql = """SELECT id, usuario, contrasena, nombre, perfil, estado, ultimo_login, fecha_creacion FROM usuario 
+                            WHERE usuario = %s"""
+                    
+
+                cursor.execute(sql, (user.usuario,))
                 row = cursor.fetchone()
 
                 if row is not None:
@@ -33,8 +27,13 @@ class ModelUser():
                 else:
                     return None
 
-        except Exception as e:
+        except connection.mysql.connector.Error as e:
+
+            logging.error(f"Error en la base de datos: {e}")
+            if e.errno  == 2003:
+                return render_template('error_conexion_servidor.html')
             raise Exception(e)
+
         
     @classmethod
     def get_by_id(self, id):
@@ -42,8 +41,11 @@ class ModelUser():
             connection = get_connection()
             with connection.cursor() as cursor:
                 sql = """SELECT id, usuario, nombre, perfil, estado, ultimo_login, fecha_creacion FROM usuario 
-                    WHERE id = '{}'""".format(id)
-                cursor.execute(sql)
+                     WHERE id = %s"""
+                
+                cursor.execute(sql, (id,))
+
+
                 row = cursor.fetchone()
 
                 if row is not None:
@@ -51,5 +53,8 @@ class ModelUser():
                     return logged_user
                 else:
                     return None
-        except Exception as e:
+        except connection.mysql.connector.Error as e:
+            logging.error(f"Error en la base de datos: {e}")
+            if e.errno  == 2003:
+                return render_template('error_conexion_servidor.html')
             raise Exception(e)
