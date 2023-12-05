@@ -29,7 +29,6 @@ class ModelUser():
 
                 if row is not None:
                     user = User(row[0], row[1], User.check_password(row[2], user.contrasena), row[3], row[4], row[5], row[6], row[7])
-                    print(row)
                     return user
                 else:
                     return None

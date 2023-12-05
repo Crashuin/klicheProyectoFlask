@@ -15,16 +15,17 @@ def get_connection():
         )
     except DatabaseError as ex:
         raise ex
+    
 
-class UserModel():
+class ProductoModel():
 
     @classmethod
-    def register(self, user):
+    def register(self, producto):
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                sql = """INSERT INTO usuario (usuario, contrasena, nombre, perfil, estado)
-                    VALUES ('{}', '{}', '{}', '{}', '{}')""".format(user.usuario, generate_password_hash(user.contrasena) , user.nombre, user.perfil, user.estado)
+                sql = """INSERT INTO categoria ("nomCategoria")
+                     VALUES ('{}')""".format(categoria.nomCategoria)
                 cursor.execute(sql)
                 connection.commit()
                 return True
@@ -32,17 +33,19 @@ class UserModel():
             raise Exception(e)
         finally:
             connection.close()
-
+    
     @classmethod
-    def listar_usuarios(self):
+    def listar_categorias(cls):
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                sql = """SELECT * FROM usuario"""
+                sql = """SELECT * FROM categoria"""
                 cursor.execute(sql)
-                users = cursor.fetchall()
-                return users
+                clientes = cursor.fetchall()
+                return clientes
         except Exception as e:
             raise Exception(e)
         finally:
             connection.close()
+
+    
